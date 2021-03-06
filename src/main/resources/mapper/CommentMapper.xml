@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.CommentMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.blog.entity.Comment">
+        <id property="id" column="id"></id>
+        <result property="postId" column="post_id"></result>
+        <result property="commentContent" column="comment_content"></result>
+        <result property="commentParent" column="comment_parent"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="pathTrace" column="path_trace"></result>
+        <result property="acceptUserId" column="accept_user_id"></result>
+        <result property="likeCount" column="like_count"></result>
+        <result property="dislikeCount" column="dislike_count"></result>
+        <result property="createTime" column="create_time"></result>
+
+        <association property="user" javaType="com.example.blog.entity.User">
+            <id property="id" column="user_id"/>
+            <result property="userDisplayName" column="user_display_name"/>
+            <result property="userName" column="user_name"/>
+            <result property="userAvatar" column="user_avatar"/>
+        </association>
+    </resultMap>
+
+    <select id="findLatestCommentByLimit" resultType="com.example.blog.entity.Comment">
+        SELECT
+            id,
+            post_id,
+            comment_content,
+            comment_parent,
+            user_id,
+            path_trace,
+            accept_user_id,
+            like_count,
+            dislike_count,
+            create_time
+        FROM
+            comment
+        WHERE
+             del_flag = 0
+        ORDER BY
+            create_time DESC
+            LIMIT #{limit}
+    </select>
+
+    <delete id="deleteByUserId">
+       DELETE
+       FROM
+           comment
+       WHERE
+           user_id = #{value}
+            AND del_flag = 0
+    </delete>
+
+    <delete id="deleteByAcceptUserId">
+       DELETE
+       FROM
+           comment
+       WHERE
+           accept_user_id = #{value}
+            AND del_flag = 0
+    </delete>
+
+    <select id="getLatestCommentByIP" resultType="com.example.blog.entity.Comment">
+        SELECT
+            id,
+            post_id,
+            comment_content,
+            comment_parent,
+            user_id,
+            path_trace,
+            accept_user_id,
+            create_time
+        FROM
+            comment
+        WHERE
+            comment_author_ip = #{value}
+             AND del_flag = 0
+        ORDER BY
+            id DESC
+            LIMIT 1
+    </select>
+
+
+    <select id="selectChildCommentIds" resultType="java.lang.Long">
+        SELECT
+            id
+        FROM
+            comment
+        WHERE
+            path_trace LIKE CONCAT('%',#{pathTrace},'%')
+             AND del_flag = 0
+    </select>
+
+    <select id="getLatestCommentByAcceptUser" resultType="com.example.blog.entity.Comment">
+        SELECT
+            id,
+            comment_content,
+            create_time
+        FROM
+            comment
+        WHERE
+            accept_user_id = #{userId}
+             AND del_flag = 0
+        ORDER BY
+            create_time DESC
+            LIMIT #{limit}
+    </select>
+
+
+    <select id="findByPostId" resultMap="BaseResultMap">
+        SELECT
+            t.id,
+            t.post_id,
+            t.comment_content,
+            t.comment_parent,
+            t.user_id,
+            t.path_trace,
+            t.accept_user_id,
+            t.like_count,
+            t.dislike_count,
+            t.create_time,
+            u.id user_id,
+            u.user_display_name,
+            u.user_name,
+            u.user_avatar
+        FROM comment t, user u
+        WHERE t.post_id = #{postId} AND t.user_id = u.id
+    </select>
+</mapper>

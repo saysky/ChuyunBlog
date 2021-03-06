@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.PostMapper">
+
+    <sql id="publish_status">0</sql>
+    <sql id="draft_status">1</sql>
+    <sql id="trash_status">2</sql>
+
+    <resultMap id="BaseResultMap" type="com.example.blog.entity.Post">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="post_title" property="postTitle"></result>
+        <result column="post_type" property="postType"></result>
+        <result column="post_summary" property="postSummary"></result>
+        <result column="post_thumbnail" property="postThumbnail"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="post_status" property="postStatus"></result>
+        <result column="post_views" property="postViews"></result>
+        <result column="post_likes" property="postLikes"></result>
+        <result column="comment_size" property="commentSize"></result>
+        <result column="is_recommend" property="isRecommend"></result>
+        <result column="is_sticky" property="isSticky"></result>
+        <association property="user" javaType="com.example.blog.entity.User">
+            <id property="id" column="user_id"/>
+            <result property="userDisplayName" column="user_display_name"/>
+            <result property="userName" column="user_name"/>
+            <result property="userAvatar" column="user_avatar"/>
+        </association>
+        <association property="category" javaType="com.example.blog.entity.Category">
+            <id property="id" column="cate_id"/>
+            <result property="cateName" column="cate_name"/>
+            <result property="cateDesc" column="cate_desc"/>
+            <result property="cateSort" column="cate_sort"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getPostViewsSum" resultType="java.lang.Long">
+        SELECT
+            sum( post_views ) 
+        FROM
+            post
+        WHERE
+            del_flag = 0
+    </select>
+
+
+    <update id="resetCommentSize">
+        UPDATE post t
+        SET t.comment_size = ( SELECT COUNT( * ) FROM comment c WHERE c.post_id = #{value} AND c.del_flag = 0 )
+        WHERE
+            t.id = #{value}
+            AND del_flag = 0
+    </update>
+
+    <update id="incrPostLikes">
+        UPDATE post
+        SET post_likes = post_likes + 1
+        WHERE
+            id = #{value}
+            AND del_flag = 0
+    </update>
+
+    <update id="incrPostViews">
+        UPDATE post
+        SET post_views = post_views + 1
+        WHERE
+            id = #{value}
+            AND del_flag = 0
+    </update>
+
+
+    <delete id="deleteByUserId">
+        DELETE 
+        FROM
+            post
+        WHERE
+            user_id = #{value}
+            AND del_flag = 0
+    </delete>
+
+
+    <select id="getTodayCount" resultType="java.lang.Integer">
+        SELECT
+            count( * )
+        FROM
+            post
+        WHERE
+            to_days( create_time ) = to_days( now( ) )
+            AND del_flag = 0
+    </select>
+
+
+    <select id="findPostByCondition" resultMap="BaseResultMap">
+        SELECT
+        p.id,
+        p.post_title,
+        p.post_type,
+        p.post_summary,
+        p.post_thumbnail,
+        p.create_time,
+        p.post_status,
+        p.post_views,
+        p.post_likes,
+        p.comment_size,
+        p.is_recommend,
+        p.is_sticky,
+        u.user_display_name,
+        u.user_avatar,
+        u.user_name,
+        u.id user_id,
+        c.id cate_id,
+        c.cate_name,
+        c.cate_sort
+        FROM
+        post p,
+        user u,
+        category c,
+        post_category_ref pc
+        <if test="condition.tagId != null">
+            , post_tag_ref pt
+        </if>
+        <where>
+            p.post_status = 0 AND
+            <if test="condition.cateId != null">
+                c.id = #{condition.cateId} AND
+            </if>
+            <if test="condition.userId != null">
+                u.id = #{condition.userId} AND
+            </if>
+            <if test="condition.keywords != null">
+                p.post_title LIKE CONCAT('%', #{condition.keywords} ,'%') AND
+            </if>
+            <if test="condition.tagId != null">
+                pt.tag_id = #{condition.tagId} AND
+                pt.post_id = p.id AND
+            </if>
+            <if test="condition.postType != null and condition.postType != ''">
+                p.post_type = #{condition.postType} AND
+            </if>
+            u.id = p.user_id AND
+            pc.post_id = p.id AND
+            pc.cate_id = c.id AND
+            u.del_flag = 0 AND
+            p.del_flag = 0 AND
+            c.del_flag = 0 AND
+            pc.del_flag = 0
+        </where>
+    </select>
+
+    <select id="selectIdByUserId" resultType="java.lang.Long">
+        SELECT id FROM post WHERE user_id = #{userId} AND del_flag = 0
+    </select>
+
+</mapper>
