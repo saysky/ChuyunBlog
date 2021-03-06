@@ -6,11 +6,12 @@
 ## 技术组成
 该项目分为 SpringBoot、SpringBoot+Dubbo 和 SSM 多个版本，当前仓库代码属于 SpringBoot 版本 <br/>
 
-- [初云博客-SpringBoot版本](https://github.com/saysky/ChuyunBlog)
-- [初云博客-SSM版本增强版](https://github.com/saysky/SSMBlogPlus)
-- [初云博客-SSM版本普通版](https://github.com/saysky/ChuyunBlog-SSM)
-- [初云博客-Dubbo版本](https://github.com/saysky/ChuyunBlog-Dubbo)
-
+- [初云博客-SpringBoot博客版本](https://github.com/saysky/ChuyunBlog)
+- [初云博客-SSM博客增强版本](https://github.com/saysky/SSMBlogPlus)
+- [初云博客-SSM博客普通版本](https://github.com/saysky/ChuyunBlog-SSM)
+- [初云博客-Dubbo博客版本](https://github.com/saysky/ChuyunBlog-Dubbo)
+- [学车论坛-SpringBoot论坛版本](https://github.com/saysky/forum)
+- [动漫平台-SpringBoot动漫版本](https://github.com/saysky/cartoon)
 
 三者功能基本一致，技术组织不同。
 
