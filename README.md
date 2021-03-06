@@ -5,7 +5,6 @@
 
 ## 技术组成
 该项目分为 SpringBoot、SpringBoot+Dubbo 和 SSM 多个版本，当前仓库代码属于 SpringBoot 版本 <br/>
-SpringBoot 版本技术组成：SpringBoot2.x、MyBatis Plus、Shiro、Thymeleaf <br/> 
 
 - [初云博客-SpringBoot版本](https://github.com/saysky/ChuyunBlog)
 - [初云博客-SSM版本增强版](https://github.com/saysky/SSMBlogPlus)
@@ -16,7 +15,7 @@ SpringBoot 版本技术组成：SpringBoot2.x、MyBatis Plus、Shiro、Thymeleaf
 三者功能基本一致，技术组织不同。
 
 - SpringBoot 版本：SpringBoot+MyBatis+Shiro+Thymeleaf+BootStrap
-- SSM 版本：Spring+SpringMVC+MyBatis+Thymeleaf
+- SSM 版本：Spring+SpringMVC+MyBatis+Thymeleaf+BootStrap
 - Dubbo 版本：Dubbo+SpringBoot+MyBatis+Shiro+Thymeleaf+BootStrap
 
 该项目最近写了一篇 10000 字的左右论文，作为参考 <br/>
