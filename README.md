@@ -1,17 +1,17 @@
 # SpringBoot博客
 基于 SpringBoot 实现的博客系统，包含用户注册、登录、找回密码、文章管理、分类管理、标签管理、评论管理、相册管理、关注粉丝、点赞、收藏、举报、相册管理、公告管理、用户管理、角色管理和权限管理等功能。<br/>
 [详细说明](http://liuyanzhao.com/shop/chuyunblog.html) <br/>
-预览地址：[https://chuyunblog.liuyanzhao.com](https://chuyunblog.liuyanzhao.com)
+预览地址：[http://chuyunblog.liuyanzhao.com](http://chuyunblog.liuyanzhao.com)
 
 ## 技术组成
 该项目分为 SpringBoot、SpringBoot+Dubbo 和 SSM 多个版本，当前仓库代码属于 SpringBoot 版本 <br/>
 
-- [初云博客-SpringBoot博客版本](https://github.com/saysky/ChuyunBlog)
-- [初云博客-SSM博客增强版本](https://github.com/saysky/SSMBlogPlus)
-- [初云博客-SSM博客普通版本](https://github.com/saysky/ChuyunBlog-SSM)
-- [初云博客-Dubbo博客版本](https://github.com/saysky/ChuyunBlog-Dubbo)
-- [学车论坛-SpringBoot论坛版本](https://github.com/saysky/forum)
-- [动漫平台-SpringBoot动漫版本](https://github.com/saysky/cartoon)
+- [初云博客-SpringBoot博客版本](http://github.com/saysky/ChuyunBlog)
+- [初云博客-SSM博客增强版本](http://github.com/saysky/SSMBlogPlus)
+- [初云博客-SSM博客普通版本](http://github.com/saysky/ChuyunBlog-SSM)
+- [初云博客-Dubbo博客版本](http://github.com/saysky/ChuyunBlog-Dubbo)
+- [学车论坛-SpringBoot论坛版本](http://github.com/saysky/forum)
+- [动漫平台-SpringBoot动漫版本](http://github.com/saysky/cartoon)
 
 三者功能基本一致，技术组织不同，目前SpringBoot版本功能最多。
 - SpringBoot 版本：SpringBoot+MyBatis+Shiro+Thymeleaf+BootStrap
