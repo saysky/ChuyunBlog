@@ -1,3 +1,7 @@
+## 博主开发的其他博客或论坛项目全部在这里
+**[https://liuyanzhao.com/shop.html?k=博客](https://liuyanzhao.com/shop.html?k=博客)**   <br/>
+**[https://liuyanzhao.com/shop.html?k=论坛](https://liuyanzhao.com/shop.html?k=论坛)** <br/>
+- -------------------------------------------------------------------------------
 # SpringBoot博客
 基于 SpringBoot 实现的博客系统，包含用户注册、登录、找回密码、文章管理、分类管理、标签管理、评论管理、相册管理、关注粉丝、点赞、收藏、举报、相册管理、公告管理、用户管理、角色管理和权限管理等功能。<br/>
 [详细说明](http://liuyanzhao.com/shop/chuyunblog.html) <br/>
