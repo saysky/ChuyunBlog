@@ -127,4 +127,3 @@
         FROM comment t, user u
         WHERE t.post_id = #{postId} AND t.user_id = u.id
     </select>
-</mapper>

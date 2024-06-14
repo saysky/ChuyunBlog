@@ -152,4 +152,3 @@
         SELECT id FROM post WHERE user_id = #{userId} AND del_flag = 0
     </select>
 
-</mapper>
